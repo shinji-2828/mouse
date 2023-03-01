@@ -1,0 +1,20 @@
+version: '3'
+services:
+  app:
+    container_name: mouse-app
+    build:
+      context: ./build/app
+      dockerfile: Dockerfile
+    env_file:
+      - ./build/env/.env
+    volumes:
+      - ./:/go/src/mouse
+  postgres:
+    container_name: mouse-postgres
+    build:
+      context: ./build/postgres
+      dockerfile: Dockerfile
+    env_file:
+      - ./build/env/.env
+    volumes:
+      - ./build/postgres/init:/docker-entrypoint-initdb.d
